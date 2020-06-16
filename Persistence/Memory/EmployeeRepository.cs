@@ -1,8 +1,9 @@
-﻿using RestApiEmployees.Models;
+﻿using RestApiEmployees.Domain.Models;
+using RestApiEmployees.Domain.Repositories;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RestApiEmployees.Services
+namespace RestApiEmployees.Persistence.Memory
 {
     public class EmployeeRepository : IEmployeeRepository
     {

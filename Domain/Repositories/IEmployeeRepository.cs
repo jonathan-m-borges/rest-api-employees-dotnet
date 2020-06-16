@@ -1,7 +1,7 @@
-﻿using RestApiEmployees.Models;
+﻿using RestApiEmployees.Domain.Models;
 using System.Collections.Generic;
 
-namespace RestApiEmployees.Services
+namespace RestApiEmployees.Domain.Repositories
 {
     public interface IEmployeeRepository
     {
