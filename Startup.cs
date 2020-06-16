@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RestApiEmployees.Domain.Repositories;
 using RestApiEmployees.Domain.Services;
-using RestApiEmployees.Persistence.Memory;
+using RestApiEmployees.Persistence.PostgreSQL;
 
 namespace RestApiEmployees
 {
@@ -22,7 +22,7 @@ namespace RestApiEmployees
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IEmployeeService, EmployeeService>();
-            services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
+            services.AddSingleton<IEmployeeRepository, EmployeeRepositoryPG>();
 
             services.AddControllers();
         }
