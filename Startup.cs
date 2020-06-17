@@ -1,12 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RestApiEmployees.Domain.Repositories;
 using RestApiEmployees.Domain.Services;
-using RestApiEmployees.Persistence.PostgreEF;
 using RestApiEmployees.Persistence.PostgreSQL;
 
 namespace RestApiEmployees
@@ -24,13 +22,6 @@ namespace RestApiEmployees
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IEmployeeService, EmployeeService>();
-
-            //PG ADONET
-            //services.AddSingleton<IEmployeeRepository, EmployeeRepositoryPG>();
-
-            //PG EF
-            services.AddDbContext<EmployeesDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("postgresql")));
             services.AddSingleton<IEmployeeRepository, EmployeeRepositoryPG>();
 
             services.AddControllers();
