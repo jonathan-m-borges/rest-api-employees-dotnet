@@ -1,10 +1,13 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RestApiEmployees.Domain.Repositories;
 using RestApiEmployees.Domain.Services;
+using RestApiEmployees.Persistence.Memory;
+using RestApiEmployees.Persistence.PostgreEF;
 using RestApiEmployees.Persistence.PostgreSQL;
 
 namespace RestApiEmployees
@@ -21,8 +24,18 @@ namespace RestApiEmployees
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IEmployeeService, EmployeeService>();
-            services.AddSingleton<IEmployeeRepository, EmployeeRepositoryPG>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
+
+            //In Memory
+            //services.AddSingleton<IEmployeeRepository, EmployeeRepositoryMemory>();
+            
+            //PostgreSQL Ansi
+            //services.AddSingleton<IEmployeeRepository, EmployeeRepositoryPG>();
+
+            //Postgre EntityFramework
+            services.AddScoped<IEmployeeRepository, EmployeeRepositoryEF>();
+            services.AddDbContext<EmployeesContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("postgresql")));
 
             services.AddControllers();
         }

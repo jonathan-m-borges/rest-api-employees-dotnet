@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace RestApiEmployees.Persistence.Memory
 {
-    public class EmployeeRepository : IEmployeeRepository
+    public class EmployeeRepositoryMemory : IEmployeeRepository
     {
         private static int idCount = 1;
         private Dictionary<int, Employee> employees = new Dictionary<int, Employee>();
