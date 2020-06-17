@@ -1,80 +1,93 @@
 FORMAT: 1A
-HOST: https://polls.apiblueprint.org/
+HOST: https://not-implemented-yet/api/
 
-# employees
+# Employees Simple WebAPI
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+Esta é uma WebAPI simples de demonstração, para cadastro de Empregados.
 
-## Questions Collection [/questions]
+## Empregados [/employees]
 
-### List All Questions [GET]
+### Listar todos os Empregados [GET]
 
 + Response 200 (application/json)
 
         [
             {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
+                "id": 1,
+                "name": "Jonathan Borges",
+                "salary": 15000.99,
+                "age": 30,
+                "profileImage": "https://avatars1.githubusercontent.com/u/912571?s=460&u=f93fe75196ffca0d3070a571c0e592a406328678&v=4"
             }
         ]
 
-### Create a New Question [POST]
+### Obter um Empregado pelo ID [GET /employees/:id]
 
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 1,
+                "name": "Jonathan Borges",
+                "salary": 15000.99,
+                "age": 30,
+                "profileImage": "https://avatars1.githubusercontent.com/u/912571?s=460&u=f93fe75196ffca0d3070a571c0e592a406328678&v=4"
+            }
+        ]
+        
+
+### Criar um novo Empregado [POST]
 
 + Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+            "name": "Jonathan Borges",
+            "salary": 15000.99,
+            "age": 30,
+            "profileImage": "https://avatars1.githubusercontent.com/u/912571?s=460&u=f93fe75196ffca0d3070a571c0e592a406328678&v=4"
         }
 
 + Response 201 (application/json)
 
-    + Headers
+        {
+            "id": 1,
+            "name": "Jonathan Borges",
+            "salary": 15000.99,
+            "age": 30,
+            "profileImage": "https://avatars1.githubusercontent.com/u/912571?s=460&u=f93fe75196ffca0d3070a571c0e592a406328678&v=4"
+        }
+        
 
-            Location: /questions/2
+### Atualizar um Empregado existente [PUT /employees/:id]
 
-    + Body
++ Request (application/json)
 
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
-            }
+        {
+            "name": "Jonathan Borges",
+            "salary": 15000.99,
+            "age": 30,
+            "profileImage": "https://avatars1.githubusercontent.com/u/912571?s=460&u=f93fe75196ffca0d3070a571c0e592a406328678&v=4"
+        }
+
++ Response 201 (application/json)
+
+        {
+            "id": 1,
+            "name": "Jonathan Borges",
+            "salary": 15000.99,
+            "age": 30,
+            "profileImage": "https://avatars1.githubusercontent.com/u/912571?s=460&u=f93fe75196ffca0d3070a571c0e592a406328678&v=4"
+        }
+
+        
+### Excluir um Empregado [DELETE /employees/:id]
+
++ Response 200 (application/json)
+
+        {
+            "id": 1,
+            "name": "Jonathan Borges",
+            "salary": 15000.99,
+            "age": 30,
+            "profileImage": "https://avatars1.githubusercontent.com/u/912571?s=460&u=f93fe75196ffca0d3070a571c0e592a406328678&v=4"
+        }
