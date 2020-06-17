@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RestApiEmployees.Models;
-using RestApiEmployees.Services;
+using RestApiEmployees.Domain.Models;
+using RestApiEmployees.Domain.Services;
 using System.Collections.Generic;
 
 namespace RestApiEmployees.Controllers
@@ -9,18 +9,18 @@ namespace RestApiEmployees.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private readonly IEmployeeRepository repository;
+        private readonly IEmployeeService service;
 
-        public EmployeesController(IEmployeeRepository repository)
+        public EmployeesController(IEmployeeService service)
         {
-            this.repository = repository;
+            this.service = service;
         }
 
         // GET: api/Employees
         [HttpGet]
         public IEnumerable<Employee> Get()
         {
-            var employees = repository.ListAll();
+            var employees = service.ListAll();
             return employees;
         }
 
@@ -28,7 +28,7 @@ namespace RestApiEmployees.Controllers
         [HttpGet("{id}", Name = "Get")]
         public ActionResult<Employee> Get(int id)
         {
-            var employee = repository.GetById(id);
+            var employee = service.GetById(id);
             if (employee != null)
                 return employee;
 
@@ -39,7 +39,7 @@ namespace RestApiEmployees.Controllers
         [HttpPost]
         public Employee Post([FromBody] Employee employee)
         {
-            repository.Add(employee);
+            service.Add(employee);
             return employee;
         }
 
@@ -47,12 +47,12 @@ namespace RestApiEmployees.Controllers
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] Employee employee)
         {
-            var employeeFinded = repository.GetById(id);
+            var employeeFinded = service.GetById(id);
             if (employeeFinded == null)
                 return NotFound();
 
             employee.Id = id;
-            repository.Update(employee);
+            service.Update(employee);
 
             return Ok(employee);
         }
@@ -61,11 +61,11 @@ namespace RestApiEmployees.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            var employeeFinded = repository.GetById(id);
+            var employeeFinded = service.GetById(id);
             if (employeeFinded == null)
                 return NotFound();
 
-            repository.DeleteById(id);
+            service.DeleteById(id);
             return Ok();
         }
     }

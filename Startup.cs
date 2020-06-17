@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RestApiEmployees.Services;
+using RestApiEmployees.Domain.Repositories;
+using RestApiEmployees.Domain.Services;
+using RestApiEmployees.Persistence.PostgreSQL;
 
 namespace RestApiEmployees
 {
@@ -19,7 +21,8 @@ namespace RestApiEmployees
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
+            services.AddSingleton<IEmployeeService, EmployeeService>();
+            services.AddSingleton<IEmployeeRepository, EmployeeRepositoryPG>();
 
             services.AddControllers();
         }
