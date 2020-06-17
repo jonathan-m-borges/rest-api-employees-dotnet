@@ -22,8 +22,7 @@ Neste tutorial, vamos utilizar o Visual Studio Code que é uma excetente opção
 
 Baixe a versão estável (Stable Build) do site [https://code.visualstudio.com/](https://code.visualstudio.com/) e execute a instalação.
 
-> **Dica**
-> Marque as opções **"Open with Code"** durante a instalação.
+> **Dica** - Marque as opções **"Open with Code"** durante a instalação.
 > ![Dica instalação VSCode](./assets/vscode-01.png)
 
 
@@ -33,7 +32,7 @@ Baixe a versão: **.NET Core 3.1 0 -> Download .NET Core SDK** do site [https://
 
 ![Download .NET Core SDK](./assets/sdk-dotnetcore.png)
 
-Após a instalação, verifique a instalaçaõ, executando o comando a seguir na linha de comando do Windows:
+Verifique a instalação executando o comando a seguir na linha de comando do Windows:
 
 ![Verificando instalação do SDK](./assets/sdk-dotnetcore-test-cmd.png)
 
@@ -42,6 +41,8 @@ Após a instalação, verifique a instalaçaõ, executando o comando a seguir na
 
 **Instalando o Plugin C#**
 
+Este plugin permitirá o desenvolvimento de projetos em dotnet Core e C# utilizando o VSCode.
+
  - Execute o VSCode;
  - Clique no Menu Extensions localizado no lado esquerdo do VSCode;
  - Procure pela extensão **C#** e instale-a;
@@ -49,17 +50,20 @@ Após a instalação, verifique a instalaçaõ, executando o comando a seguir na
  - Durante a instalação, serão baixados alguns pacotes, portanto aguarde o fim da instalação.
    ![Instalando Extension C# - status](./assets/vscode-plugin-c-status.png)
    
-Este plugin permitirá o desenvolvimento de projetos em dotnet Core e C# utilizando o VSCode.
 
 **Instalando o Plugin C# Extensions**
+
+Este plugin facilitará a criação de novas Classes e Interfaces C# com o VSCode.
 
  - Clique no Menu Extensions localizado no lado esquerdo do VSCode;
  - Procure pela extensão **C# Extensions** e instale-a;
    ![Instalando Extension C# Extensions](./assets/vscode-plugin-c-ext.png)
 
-Este plugin facilitará a criação de novas Classes e Interfaces C# com o VSCode.
 
 
 ### Referências
-
- - [](https://medium.com/@renato.groffe/net-core-visual-studio-code-criando-rapidamente-classes-e-interfaces-com-c-extensions-e73bad83e867)
+ 
+ - [Instalação Visual Studio 2019](https://docs.microsoft.com/pt-br/visualstudio/install/install-visual-studio?view=vs-2019)
+ - [Visual Studio Code](https://code.visualstudio.com/](https://code.visualstudio.com/)
+ - [SDK .NET Core](https://dotnet.microsoft.com/download)
+ - [Criando classes e interfaces com C# Extensions](https://medium.com/@renato.groffe/net-core-visual-studio-code-criando-rapidamente-classes-e-interfaces-com-c-extensions-e73bad83e867)
