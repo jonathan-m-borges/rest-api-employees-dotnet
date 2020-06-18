@@ -1,6 +1,6 @@
 # Criando uma WebAPI com dotnet core e C#
 
-## Parte 3 - Persistindo os dados no banco de dados PostgreSQL - com EntityFramework
+## Parte 4 - Persistindo os dados no banco de dados PostgreSQL - com EntityFramework
 
 Nesta etapa vamos persistir os dados dos empregados no banco de dados PostgreSQL, utilizando o framework ORM **EntityFramework**.
 
