@@ -46,7 +46,7 @@ A recomendação neste tutorial é utilizar o **Postbird**.
 - Conectar no banco de dados:
   ![conectando no banco de dados](./assets/postbird01.png)
 - Criando uma nova Database: **employees**
-  ![criando database](./assents/postbird02.png)
+  ![criando database](./assets/postbird02.png)
 - Selecione o banco criado **employees** e clique na aba **Query** para executar o script de criação da tabela **employees**
   ```sql
   create table employees (
