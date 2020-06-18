@@ -349,21 +349,19 @@ Nesta etapa vamos compilar e executar a aplicação:
 Para testar os endpoints da aplicação, vamos utilizar o Postman
 
 - Instale o Postman caso ainda não tenha instalado. [Site Postman](https://postman.com/) e consuma os endpoints da aplicação.
+- A aplicação estará rodando nas urls:
+  - http://localhost:5000/api/employees
+  - https://localhost:5001/api/employees
 
 
 ---
 ### Referências
  
- **Padrões de projeto**
-
  - [ServiceLayer](https://trailhead.salesforce.com/pt-BR/content/learn/modules/apex_patterns_sl/apex_patterns_sl_learn_sl_principles)
  - [ServiceLayer](https://martinfowler.com/eaaCatalog/serviceLayer.html)
  - [Inversão de dependência e injeção de controle](https://docs.microsoft.com/pt-br/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.1)
  - [Inversão de dependência e injeção de controle](https://medium.com/@gustavoosantoos95/entendendo-invers%C3%A3o-de-controle-e-inje%C3%A7%C3%A3o-de-depend%C3%AAncias-nativas-no-net-core-26f9a3f6895d#:~:text=%5BASP.NET%20Core%5D%20Entendendo%20invers%C3%A3o%20de%20controle,e%20inje%C3%A7%C3%A3o%20de%20depend%C3%AAncias%20nativa&text=Um%20dos%20grandes%20problemas%20no,encarregar%20de%20finalizar%20esse%20objeto)
- 
- 
- **Outros**
- 
- - [Documentando APIs com apiary.io](https://apiary.io/)
+ - [Repository Pattern](https://medium.com/@adlerpagliarini/c-net-core-criando-uma-aplica%C3%A7%C3%A3o-utilizando-repository-pattern-com-dois-orms-diferentes-dapper-97e8aa6ca35)
+  - [Documentando APIs com apiary.io](https://apiary.io/)
  
  
