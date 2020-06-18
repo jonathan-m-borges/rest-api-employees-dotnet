@@ -10,6 +10,6 @@ Depois, é implementada a persistência dos dados no banco de dados PostgreSQL, 
 **Siga os passos do tutorial:**
 
 - [Passo 1 - Preparação do ambiente](./parte1-ambiente.md)
-- [Passo 2 - Criando a WebAPI](./parte2-criando-webapi)
+- [Passo 2 - Criando a WebAPI](./parte2-criando-webapi.md)
 - [Passo 3 - Persitindo no PostgreSQL - usando SQL](./parte3-persistindo-postgresql.md)
-- [Passo 3 - Persitindo no PostgreSQL - usando EntityFramework](./parte4-persistindo-postgresql-entityframework)
+- [Passo 3 - Persitindo no PostgreSQL - usando EntityFramework](./parte4-persistindo-postgresql-entityframework.md)
