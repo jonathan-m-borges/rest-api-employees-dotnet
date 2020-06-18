@@ -175,7 +175,7 @@ Foi utilizado na aplicação o padrão de projeto de Camada de Serviço/ServiceL
           }
       }
   }
-  ``
+  ```
 
 #### Criando a interface IEmployeesRepository
 
@@ -203,14 +203,152 @@ Foi utilizado na aplicação o padrão de projeto Repository para abstrair a cam
   ```
 
 
-
 #### Implementando a interface IEmployeesService - com a casse EmployeesService
 
+> Por se tratar de uma aplicação simples não há regras de negócio, mas caso houvessem, estariam aqui.
+> Nesta camada de serviços ficam as regras de negócio. Esta camanda de serviço utiliza os Repositórios para tratar dos dados (buscar, salvar, atualizar, deletar) e também contêm as regras de negócio da aplicação.
+
+- Crie a classe EmployeesService, dentro do diretório Domain\Services
+  ```csharp
+  using System.Collections.Generic;
+  using RestApiEmployees.Domain.Interfaces;
+  using RestApiEmployees.Domain.Models;
+  namespace RestApiEmployees.Domain.Services
+  {
+      public class EmployeesService : IEmployeesService
+      {
+          private readonly IEmployeesRepository repository;
+          public EmployeesService(IEmployeesRepository repository)
+          {
+              this.repository = repository;
+          }
+
+          public void Add(Employee employee)
+          {
+              //TODO: regras de negócio, se tiver
+              //Exemplo: enviar email para o RH com os dados do empregado adicionado
+              repository.Add(employee);
+          }
+
+          public void DeleteById(int id)
+          {
+              //TODO: regras de negócio, se tiver
+              repository.DeleteById(id);
+          }
+
+          public Employee GetById(int id)
+          {
+              //TODO: regras de negócio, se tiver
+              return repository.GetById(id);
+          }
+
+          public List<Employee> ListAll()
+          {
+              //TODO: regras de negócio, se tiver
+              return repository.ListAll();
+          }
+
+          public void Update(Employee employee)
+          {
+              //TODO: regras de negócio, se tiver
+              repository.Update(employee);
+          }
+      }
+  }  
+  ```
+
+
+#### Implementando a interface IEmployeesRepository - com a casse EmployeesRepository
+
+Esta camada abstrai o banco de dados.
+
+Neste exemplo, vamos apenas salvar os dados na memória da aplicação. Posteriormente vamos persistir em banco de dados.
+
+- Organizando diretórios da aplicação:
+  ```console
+  mkdir Persistence\Memory
+  ```
+- Crie a classe EmployeesRepository dentro do diretório Persistence\Memory:
+  ```csharp
+  using System.Collections.Generic;
+  using System.Linq;
+  using RestApiEmployees.Domain.Interfaces;
+  using RestApiEmployees.Domain.Models;
+  namespace RestApiEmployees.Persistence.Memory
+  {
+      public class EmployeesRepository : IEmployeesRepository
+      {
+          private static int idCount = 1;
+          private Dictionary<int, Employee> employees = new Dictionary<int, Employee>();
+
+          public List<Employee> ListAll()
+          {
+              return employees.Values.ToList();
+          }
+
+          public Employee GetById(int id)
+          {
+              if (employees.ContainsKey(id))
+                  return employees[id];
+              else
+                  return null;
+          }
+          public void Add(Employee employee)
+          {
+              employee.Id = idCount++;
+              employees.Add(employee.Id, employee);
+          }
+
+          public void Update(Employee employee)
+          {
+              if (employees.ContainsKey(employee.Id))
+                  employees[employee.Id] = employee;
+          }
+
+          public void DeleteById(int id)
+          {
+              if (employees.ContainsKey(id))
+                  employees.Remove(id);
+          }
+      }
+  }
+  ```
 
 
 #### Ajustando a classe Startup.cs, registrando as classes na injeção de dependência
 
-- É necessário registrar as classes
+Consute as [referencias](#referencias) para saber mais sobre Inversão de Controle e Injeção de Dependência.
+
+- Altere o método ```ConfigureServices(IServiceCollection services)``` da classe ```Startup.cs```:
+  ```csharp
+  public void ConfigureServices(IServiceCollection services)
+  {
+      services.AddScoped<IEmployeesService, EmployeesService>();
+      services.AddSingleton<IEmployeesRepository, EmployeesRepository>();
+      services.AddControllers();
+  }
+  ```
+
+#### Execute a aplicação
+
+Nesta etapa vamos compilar e executar a aplicação:
+
+- Para executar a aplicação, basta executar na linha de comando:
+  ```csharp
+  dotnet run
+  ```
+  Isto já irá compilar a aplicação (que tbm pode ser compilado com ```dotnet build```) e executá-la.
+
+- Você pode pedir ao dotnet já atualizar a aplicação, caso alguma classe seja alterada, rodando a aplicação da seguinte forma:
+  ```csharp
+  dotnet watch run
+  ```
+
+#### Testando a aplicação com o Postman
+
+Para testar os endpoints da aplicação, vamos utilizar o Postman
+
+- Instale o Postman caso ainda não tenha instalado. [Site Postman](https://postman.com/) e consuma os endpoints da aplicação.
 
 
 ---
