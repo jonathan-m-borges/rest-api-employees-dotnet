@@ -71,7 +71,7 @@ A recomendação neste tutorial é utilizar o **Postbird**.
 
 
 ---
-### Criando a classe EmployeesRepositoryPostgreSQL
+### Criando a classe EmployeesRepositorySQL
 
 Entre com a linha de comando no diretório raiz da aplicação (sugestão no tutorial anterior foi c:\temp\RestApiEmployees).
 
