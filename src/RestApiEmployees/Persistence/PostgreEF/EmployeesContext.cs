@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using RestApiEmployees.Domain.Models;
 
 namespace RestApiEmployees.Persistence.PostgreEF
@@ -9,15 +9,6 @@ namespace RestApiEmployees.Persistence.PostgreEF
 
         public EmployeesContext(DbContextOptions options) : base(options)
         {
-        }
-
-        protected EmployeesContext()
-        {
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

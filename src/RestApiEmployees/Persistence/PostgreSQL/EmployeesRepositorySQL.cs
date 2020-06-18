@@ -1,25 +1,64 @@
-﻿using Microsoft.Extensions.Configuration;
-using Npgsql;
-using RestApiEmployees.Domain.Models;
-using RestApiEmployees.Domain.Repositories;
 using System;
 using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
+using Npgsql;
+using RestApiEmployees.Domain.Interfaces;
+using RestApiEmployees.Domain.Models;
 
 namespace RestApiEmployees.Persistence.PostgreSQL
 {
-    public class EmployeeRepositoryPG : IEmployeeRepository
+    public class EmployeesRepositorySQL : IEmployeesRepository
     {
         private string connString;
 
-        public EmployeeRepositoryPG(IConfiguration config)
+        public EmployeesRepositorySQL(IConfiguration config)
         {
             connString = config.GetConnectionString("postgresql");
+        }
+
+        public List<Employee> ListAll()
+        {
+            using var conn = Connection();
+            try
+            {
+                using var cmd = new NpgsqlCommand("select id, name, salary, age, profile_image from employees", conn);
+                using var reader = cmd.ExecuteReader();
+                var result = new List<Employee>();
+                while (reader.Read())
+                {
+                    var employee = GetEmployee(reader);
+                    result.Add(employee);
+                }
+                return result;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public Employee GetById(int id)
+        {
+            using var conn = Connection();
+            try
+            {
+                using var cmd = new NpgsqlCommand("select id, name, salary, age, profile_image from employees where id=@id", conn);
+                cmd.Parameters.AddWithValue("id", id);
+                using var reader = cmd.ExecuteReader();
+                var result = new List<Employee>();
+                if (reader.Read())
+                    return GetEmployee(reader);
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
         }
 
         public void Add(Employee employee)
         {
             using var conn = Connection();
-
             try
             {
                 using var cmd = new NpgsqlCommand("insert into employees (name, salary, age, profile_image) values (@name, @salary, @age, @profile_image) RETURNING id", conn);
@@ -28,7 +67,6 @@ namespace RestApiEmployees.Persistence.PostgreSQL
                 cmd.Parameters.AddWithValue("age", GetValueOrDBNull(employee.Age));
                 cmd.Parameters.AddWithValue("profile_image", GetValueOrDBNull(employee.ProfileImage));
                 using var reader = cmd.ExecuteReader();
-
                 var result = new List<Employee>();
                 while (reader.Read())
                 {
@@ -42,22 +80,14 @@ namespace RestApiEmployees.Persistence.PostgreSQL
             }
         }
 
-        public Employee DeleteById(int id)
+        public void DeleteById(int id)
         {
             using var conn = Connection();
-
             try
             {
-                var employee = GetById(id, conn);
-
-                if (employee != null)
-                {
-                    using var cmd = new NpgsqlCommand("delete from employees where id=@id", conn);
-                    cmd.Parameters.AddWithValue("id", id);
-                    cmd.ExecuteNonQuery();
-                }
-
-                return employee;
+                using var cmd = new NpgsqlCommand("delete from employees where id=@id", conn);
+                cmd.Parameters.AddWithValue("id", id);
+                cmd.ExecuteNonQuery();
             }
             finally
             {
@@ -65,68 +95,11 @@ namespace RestApiEmployees.Persistence.PostgreSQL
             }
         }
 
-        public Employee GetById(int id)
+        public void Update(Employee employee)
         {
             using var conn = Connection();
-
             try
             {
-                return GetById(id, conn);
-            }
-            finally
-            {
-                conn.Close();
-            }
-        }
-
-        private Employee GetById(int id, NpgsqlConnection conn)
-        {
-            using var cmd = new NpgsqlCommand("select id, name, salary, age, profile_image from employees where id=@id", conn);
-            cmd.Parameters.AddWithValue("id", id);
-            using var reader = cmd.ExecuteReader();
-
-            var result = new List<Employee>();
-            if (reader.Read())
-                return GetEmployee(reader);
-
-            return null;
-        }
-
-        public List<Employee> ListAll()
-        {
-            using var conn = Connection();
-
-            try
-            {
-                using var cmd = new NpgsqlCommand("select id, name, salary, age, profile_image from employees", conn);
-                using var reader = cmd.ExecuteReader();
-
-                var result = new List<Employee>();
-                while (reader.Read())
-                {
-                    var employee = GetEmployee(reader);
-                    result.Add(employee);
-                }
-
-                return result;
-            }
-            finally
-            {
-                conn.Close();
-            }
-        }
-
-        public bool Update(Employee employee)
-        {
-            using var conn = Connection();
-
-            try
-            {
-                var employeePersited = GetById(employee.Id, conn);
-
-                if (employeePersited == null)
-                    return false;
-
                 using var cmd = new NpgsqlCommand("update employees set name=@name, salary=@salary, age=@age, profile_image=@profile_image where id=@id", conn);
                 cmd.Parameters.AddWithValue("id", employee.Id);
                 cmd.Parameters.AddWithValue("name", employee.Name);
@@ -134,8 +107,6 @@ namespace RestApiEmployees.Persistence.PostgreSQL
                 cmd.Parameters.AddWithValue("age", GetValueOrDBNull(employee.Age));
                 cmd.Parameters.AddWithValue("profile_image", GetValueOrDBNull(employee.ProfileImage));
                 cmd.ExecuteNonQuery();
-
-                return true;
             }
             finally
             {

@@ -1,10 +1,17 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using RestApiEmployees.Domain.Repositories;
+using Microsoft.Extensions.Logging;
+using RestApiEmployees.Domain.Interfaces;
 using RestApiEmployees.Domain.Services;
 using RestApiEmployees.Persistence.Memory;
 using RestApiEmployees.Persistence.PostgreEF;
@@ -24,18 +31,18 @@ namespace RestApiEmployees
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IEmployeesService, EmployeesService>();
 
             //In Memory
-            //services.AddSingleton<IEmployeeRepository, EmployeeRepositoryMemory>();
-            
-            //PostgreSQL Ansi
-            //services.AddSingleton<IEmployeeRepository, EmployeeRepositoryPG>();
+            //services.AddSingleton<IEmployeesRepository, EmployeesRepository>();
 
-            //Postgre EntityFramework
-            services.AddScoped<IEmployeeRepository, EmployeeRepositoryEF>();
+            //SQL in PostgreSQL
+            //services.AddSingleton<IEmployeesRepository, EmployeesRepositorySQL>();
+
+            //EntityFramework in PostgreSQL
             services.AddDbContext<EmployeesContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("postgresql")));
+            services.AddScoped<IEmployeesRepository, EmployeesRepositoryEF>();
 
             services.AddControllers();
         }
@@ -47,6 +54,9 @@ namespace RestApiEmployees
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            //https removed
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 

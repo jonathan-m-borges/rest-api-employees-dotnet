@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using RestApiEmployees.Domain.Models;
 using RestApiEmployees.Domain.Services;
-using System.Collections.Generic;
 
 namespace RestApiEmployees.Controllers
 {
@@ -9,16 +9,15 @@ namespace RestApiEmployees.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private readonly IEmployeeService service;
-
-        public EmployeesController(IEmployeeService service)
+        private readonly IEmployeesService service;
+        public EmployeesController(IEmployeesService service)
         {
             this.service = service;
         }
 
         // GET: api/Employees
         [HttpGet]
-        public IEnumerable<Employee> Get()
+        public List<Employee> Get()
         {
             var employees = service.ListAll();
             return employees;
