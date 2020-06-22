@@ -62,7 +62,7 @@ A recomendação neste tutorial é utilizar o **Postbird**.
 ---
 ### Adicionando o pacote do Npgsql
 
-- Na linha de comando no diretório raiz da aplicação e execute:
+- Na linha de comando no diretório raiz da aplicação, execute:
   ```console
   dotnet add package npgsql
   ```

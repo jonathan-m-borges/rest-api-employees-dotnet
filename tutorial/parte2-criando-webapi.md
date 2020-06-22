@@ -83,7 +83,7 @@ As operações esperadas na WebAPI são:
 
 #### Criando a interface IEmployeesService.cs
 
-Foi utilizado na aplicação o padrão de projeto de Camada de Serviço/ServiceLayer. Consute as [referências](#referencias) para mais informações.
+Foi utilizado na aplicação o padrão de projeto de Camada de Serviço/ServiceLayer. Consute as [referências](#referências) para mais informações.
 
 - Organizando diretórios da aplicação:
   ```console
@@ -179,7 +179,7 @@ Foi utilizado na aplicação o padrão de projeto de Camada de Serviço/ServiceL
 
 #### Criando a interface IEmployeesRepository
 
-Foi utilizado na aplicação o padrão de projeto Repository para abstrair a camada de dados. Consute as [referências](#referencias) para mais informações.
+Foi utilizado na aplicação o padrão de projeto Repository para abstrair a camada de dados. Consute as [referências](#referências) para mais informações.
 
 - Organizando diretórios da aplicação:
   ```console
@@ -203,7 +203,7 @@ Foi utilizado na aplicação o padrão de projeto Repository para abstrair a cam
   ```
 
 
-#### Implementando a interface IEmployeesService - com a casse EmployeesService
+#### Implementando a interface IEmployeesService - com a classe EmployeesService
 
 > Por se tratar de uma aplicação simples não há regras de negócio, mas caso houvessem, estariam aqui.
 > Nesta camada de serviços ficam as regras de negócio. Esta camanda de serviço utiliza os Repositórios para tratar dos dados (buscar, salvar, atualizar, deletar) e também contêm as regras de negócio da aplicação.
@@ -317,7 +317,7 @@ Neste exemplo, vamos apenas salvar os dados na memória da aplicação. Posterio
 
 #### Ajustando a classe Startup.cs, registrando as classes na injeção de dependência
 
-Consute as [referencias](#referencias) para saber mais sobre Inversão de Controle e Injeção de Dependência.
+Consute as [referencias](#referências) para saber mais sobre Inversão de Controle e Injeção de Dependência.
 
 - Altere o método ```ConfigureServices(IServiceCollection services)``` da classe ```Startup.cs```:
   ```csharp

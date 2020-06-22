@@ -4,7 +4,7 @@
 
 Nesta etapa vamos persistir os dados dos empregados no banco de dados PostgreSQL, utilizando o framework ORM **EntityFramework**.
 
-Para mais detalhes consulte as [referencias](#referencias).
+Para mais detalhes consulte as [referencias](#referências).
 
 Será implementado uma nova classe para a interface ```IEmployeesRepository``` que salva os dados no Postgre.
 
